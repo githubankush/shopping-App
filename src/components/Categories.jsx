@@ -1,19 +1,48 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-const Categories = () => {
-  return (
-    <div>
-        <div className='categories-nav'>
-            <ul className=' h-[42vw] flex flex-col gap-4 p-4 bg-gray-100'>
-                <li className='text-blue-600'>All Categories</li>
-                <Link to={'/product/electronics'}>Electronics</Link>
-                <Link to={'/product/fashion'}>Fashion</Link>
-                <Link to={'/product/homekitchen'}>Home & Kitchen</Link>
-                <Link to={'/product/sports'}>Sports & Outdoors</Link>
-            </ul>
-        </div>
-    </div>
-  )
-}
+import React from "react";
+import { NavLink } from "react-router-dom";
+import {
+  FaLaptop,
+  FaTshirt,
+  FaHome,
+  FaFootballBall,
+  FaThLarge,
+} from "react-icons/fa";
 
-export default Categories
+const Categories = () => {
+  const navLinkClass = ({ isActive }) =>
+    `flex items-center gap-2 p-3 rounded-md transition duration-200 ${
+      isActive ? "bg-green-600 text-white font-semibold" : "hover:bg-gray-200"
+    }`;
+
+  return (
+    <div className="w-56 h-screen sticky top-0 bg-[#c4b5fd] shadow-md">
+      <ul className="flex flex-col p-4 gap-3 mt-10">
+        <li className="text-lg font-bold text-green-700 mb-2 flex items-center gap-2">
+          <FaThLarge /> Categories
+        </li>
+
+        <NavLink to="/product" end className={navLinkClass}>
+          <FaThLarge /> All Products
+        </NavLink>
+
+        <NavLink to="/product/electronics" className={navLinkClass}>
+          <FaLaptop /> Electronics
+        </NavLink>
+
+        <NavLink to="/product/fashion" className={navLinkClass}>
+          <FaTshirt /> Fashion
+        </NavLink>
+
+        <NavLink to="/product/homekitchen" className={navLinkClass}>
+          <FaHome /> Home & Kitchen
+        </NavLink>
+
+        <NavLink to="/product/sports" className={navLinkClass}>
+          <FaFootballBall /> Sports & Outdoors
+        </NavLink>
+      </ul>
+    </div>
+  );
+};
+
+export default Categories;
