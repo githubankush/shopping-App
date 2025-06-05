@@ -12,6 +12,7 @@ import HomeKitchen from "./pages/HomeKitchen";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
 
 const App = () => {
   const location = useLocation();
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/cart" element={<Cart />} />
             <Route
               path="/product/electronics"
               element={<ElectronicsProduct />}

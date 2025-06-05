@@ -15,7 +15,7 @@ const SearchBar = () => {
   }));
 
   const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(item.toLowerCase())
+    product.name.toLowerCase().includes(item.toLowerCase()) || product.description.toLowerCase().includes(item.toLowerCase())
   );
 
   const submitHandler = (e) => {
