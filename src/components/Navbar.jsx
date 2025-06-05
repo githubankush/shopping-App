@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaShoppingCart, FaUser } from "react-icons/fa";
 import Logo from "../utils/Logo";
+import SearchBar from "../utils/SearchBar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +54,8 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
+
+          <SearchBar />
 
           <Link
             to="/register"

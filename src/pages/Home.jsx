@@ -21,7 +21,7 @@ const Home = () => {
         <img
           src={homeImages[currentIndex]}
           alt={`Slide ${currentIndex}`}
-          className="w-full h-[70vh] rounded-3xl object-cover transition-all duration-700"
+          className="w-full h-[70vh]  object-cover transition-all duration-700"
         />
 
         {/* Dots Navigation */}

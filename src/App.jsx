@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Product from "./pages/product";
-import About from "./pages/about";
+import About from "./pages/About";
 import Categories from "./components/Categories";
 import ElectronicsProduct from "./pages/ElectronicsProduct";
 import FashionProduct from "./pages/FashionProduct";
@@ -11,17 +11,18 @@ import Sports from "./pages/Sports";
 import HomeKitchen from "./pages/HomeKitchen";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ProductDetail from "./pages/ProductDetail";
 
 const App = () => {
   const location = useLocation();
   const isProductPage = location.pathname.startsWith("/product");
 
   return (
-    <>
+    <div className="bg-[#c4b5fd] min-h-screen">
       <Navbar />
-      <div className="w-full h-[calc(100vh-6rem)]   flex items-start justify-between overflow-hidden bg-black">
+      <div className="w-full h-[calc(100vh-8rem)]   flex items-start justify-between overflow-hidden bg-black">
         {isProductPage && <Categories />}
-        <div className="w-full h-full  overflow-y-scroll md:p-4 ">
+        <div className="w-full h-full  overflow-y-scroll  ">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product" element={<Product />} />
@@ -32,14 +33,14 @@ const App = () => {
               path="/product/electronics"
               element={<ElectronicsProduct />}
             />
-            <Route path="/product/:id" element={<FashionProduct />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/product/fashion" element={<FashionProduct />} />
             <Route path="/product/sports" element={<Sports />} />
             <Route path="/product/homekitchen" element={<HomeKitchen />} />
           </Routes>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
