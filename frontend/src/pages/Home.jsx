@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import homeImages from "../data/homeImages";
-
+import { useAuth } from "../context/AuthContext";
 const Home = () => {
+  const { user } = useAuth(); // Accessing user from AuthContext
+  console.log("User in Home:", user); // Debugging user data
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-scroll every 4 seconds
@@ -41,8 +43,8 @@ const Home = () => {
         <h1 className="text-4xl font-bold  text-gray-200 mt-4">
           <div className="relative flex text-3xl font-extrabold gap-1 select-none items-center justify-center">
              Welcome to  {" "}
-            <span className="bg-gradient-to-r from-lime-300 via-green-500 to-lime-300 bg-[length:200%_100%] bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite] rotate-[-6deg]">
-               S
+            <span className="ml-1 bg-gradient-to-r from-lime-300 via-green-500 to-lime-300 bg-[length:200%_100%] bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite] rotate-[-6deg]">
+                S
             </span>
             <span className="bg-gradient-to-r from-lime-300 via-green-500 to-lime-300 bg-[length:200%_100%] bg-clip-text text-transparent animate-[shimmer_3s_linear_infinite] rotate-[3deg]">
               H
@@ -58,6 +60,7 @@ const Home = () => {
               Y
               
             </span>
+            <div className="text-gray-200 font-bold">, { user?.name?.split(" ")[0]}</div>
           </div>
         </h1>
         <p className="text-gray-300 mt-2">

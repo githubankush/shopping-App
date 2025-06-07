@@ -6,6 +6,8 @@ import {
   FaHome,
   FaFootballBall,
   FaThLarge,
+  FaAngleLeft,
+  FaAngleRight,
 } from "react-icons/fa";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
@@ -19,22 +21,22 @@ const Categories = () => {
 
 
   return (
-    <div className="w-56 h-screen sticky top-0 bg-[#c4b5fd] shadow-md">
+    <div className="w-56 h-screen sticky top-0 bg-[#c4b5fd] bg-violet-100 shadow-md">
       <ul className="flex flex-col p-4 gap-2 mt-10">
 
-         <div className="flex gap-4 mb-10">
+         <div className="flex ml-3 gap-4 mb-10">
       <button
         onClick={() => navigate(-1)} // go back
-        className="px-4 py-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700"
+        className="text-2xl text-green-600 "
       >
-        <MdArrowBack className="inline-block w-full m-auto" />
+        <FaAngleLeft className="inline-block w-full m-auto" />
       </button>
 
       <button
         onClick={() => navigate(1)} // go forward
-        className="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-700"
+        className="text-2xl text-green-600 "
       >
-        <MdArrowForward className="inline-block w-full m-auto" />
+        <FaAngleRight className="inline-block w-full m-auto" />
       </button>
     </div>
 

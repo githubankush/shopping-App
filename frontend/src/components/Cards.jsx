@@ -1,13 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useCart } from "../context/CartContext";
+import axios from '../axios'; 
+import AddToCartButton from './AddToCartButton';
 const Cards = ({ product }) => {
   const { name, image, price, review, rating, description } = product;
+  
+  const { addToCart } = useCart();
+  
+  const submitHandler = async () => {
+  try {
+    await axios.post('/api/cart/add', {
+      productId: product._id,
+      quantity: 1
+    }, { withCredentials: true });
 
-  const submitHandler = () => {
-    // Handle the add to cart functionality here
-    console.log(`${name} added to cart!`);
-    alert(`${name} added to cart!`);
+    alert(`${product.name} added to cart!`);
+  } catch (err) {
+    console.error(err);
+    alert("Error adding to cart");
   }
+};
 
   return (
      <motion.div
@@ -37,8 +50,9 @@ const Cards = ({ product }) => {
           {"★".repeat(Math.floor(rating))}{"☆".repeat(5 - Math.floor(rating))}
           <span className="text-yellow-600 text-sm ml-2">({review})</span>
         </div>
-        <div className='flex justify-center items-center mt-4'>
-          <button onClick={submitHandler} className=' bg-[#6d28d9] hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-4 w-full'>Add to Cart</button>
+        <div className='flex justify-start items-center mt-4'>
+          {/* <button onClick={submitHandler} className=' bg-[#6d28d9] hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-4 w-full'>Add to Cart</button> */}
+          <AddToCartButton productId={product._id} />
         </div>
       </div>
       </div>

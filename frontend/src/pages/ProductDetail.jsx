@@ -2,10 +2,11 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import allProducts from '../data/allProducts';
 import { motion } from 'framer-motion';
-
+import { useCart } from "../context/CartContext";
 const ProductDetail = () => {
   const { id } = useParams();
   const [addedToCart, setAddedToCart] = React.useState(false);
+  const { addToCart } = useCart();
 
   // Normalize ID for matching
   const products = allProducts.map(product => ({
@@ -20,8 +21,9 @@ const ProductDetail = () => {
 
     const submitHandler = () => {
     // Handle the add to cart functionality here
-    console.log(`${name} added to cart!`);
+    addToCart(product); 
     alert(`${name} added to cart!`);
+    console.log(`${name} added to cart!`);
     setAddedToCart(true);
     // You can also implement additional logic here, like updating a cart state or making an API call to save the item in the database
     };

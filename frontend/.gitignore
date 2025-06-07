@@ -1,0 +1,67 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-workspace
+# Dependency directories
+jspm_packages/
+# TypeScript v1 declaration files
+typings/
+# Optional npm cache directory
+.npm
+# Optional eslint cache
+.eslintcache
+# Optional REPL history
+.node_repl_history
+# Output of 'npm pack'
+*.tgz
+# Yarn Integrity file
+.yarn-integrity
+# dotenv environment variable files
+.env
+.env.test
+.env.development.local
+.env.test.local
+.env.production.local
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+# Next.js build output
+.next
+# nuxt.js build / generate output
+.nuxt
+# vuepress build output
+.vuepress/dist
+# SvelteKit build output
+.svelte-kit
+# Astro build output
+
+.astro
+# SolidJS build output 
+.solid
+# Remix build output
+.remix
+# Serverless directories
+.serverless 
+# FuseBox cache 
+.fusebox

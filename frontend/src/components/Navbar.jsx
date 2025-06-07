@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaShoppingCart, FaUser } from "react-icons/fa";
 import Logo from "../utils/Logo";
 import SearchBar from "../utils/SearchBar";
+import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
+
+  
+    const { user } = useAuth();
+  
+  
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
@@ -17,28 +23,9 @@ const Navbar = () => {
   const isActive = (path) => location.pathname.startsWith(path);
 
   return (
-    <nav className="bg-[#6d28d9] text-white shadow-md sticky top-0 z-50 p-3">
+    <nav className="bg-[#6d28d9] text-white tracking-wide shadow-md sticky top-0 z-50 p-3 ">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
-        {/* <div className="text-2xl font-extrabold text-green-400">
-          SHOP<span className="text-white">PPY</span>
-        </div> */}
-        {/* <div className="text-4xl font-extrabold flex gap-1">
-          <span className="bg-gradient-to-r from-green-300 via-green-500 to-green-300 bg-clip-text text-transparent transform rotate-[-6deg]">
-            S
-          </span>
-          <span className="bg-gradient-to-r from-green-300 via-green-500 to-green-300 bg-clip-text text-transparent transform rotate-[3deg]">
-            H
-          </span>
-          <span className="bg-gradient-to-r from-green-300 via-green-500 to-green-300 bg-clip-text text-transparent transform rotate-[-2deg]">
-            O
-          </span>
-          <span className="bg-gradient-to-r from-green-300 via-green-500 to-green-300 bg-clip-text text-transparent transform rotate-[4deg]">
-            P
-          </span>
-          <span className="text-white transform rotate-[2deg]">P</span>
-          <span className="text-white transform rotate-[-3deg]">Y</span>
-        </div> */}
         <Logo />
 
         {/* Desktop Menu */}
@@ -57,7 +44,19 @@ const Navbar = () => {
 
           <SearchBar />
 
-          <Link
+          {user ? (
+            <>
+            <Link
+              to="/profile"
+              className="flex items-center gap-2 text-md hover:text-green-400 transition"
+            >
+              <FaUser size={20} />
+             <div> {user.name}</div>
+            </Link>
+             
+            </>
+          ) : (<>
+           <Link
             to="/register"
             className="px-3 py-1 border border-green-500 rounded-md hover:bg-green-500 hover:text-black transition"
           >
@@ -69,11 +68,15 @@ const Navbar = () => {
           >
             Login
           </Link>
+          
+          </>
+          )}
+          
 
           <Link to="/cart" className="relative">
             <FaShoppingCart size={22} />
             <span className="absolute -top-2 -right-2 bg-red-500 text-xs px-1 rounded-full">
-              3
+              {user?.cart?.length || 0}
             </span>
           </Link>
         </div>
