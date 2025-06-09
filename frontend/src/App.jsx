@@ -23,11 +23,21 @@ const App = () => {
 
   return (
     <CartProvider>
-      <div className=" bg-[#6d28d9] min-h-screen">
+      <div className="min-h-screen bg-[#6d28d9]">
+        {/* Navbar (always on top) */}
         <Navbar />
-        <div className="w-full h-[calc(100vh-8rem)] flex items-start justify-between overflow-hidden bg-black">
-          {isProductPage && <Categories />}
-          <div className="w-full h-full overflow-y-scroll">
+
+        {/* Page Content */}
+        <div className="flex flex-col md:flex-row w-full bg-violet-100 min-h-[calc(100vh-9rem)]  ">
+          {/* Sidebar shown only for product-related routes */}
+          {isProductPage && (
+            <div className="w-full md:w-64 lg:h-full sticky top-0 md:top-0 z-10">
+              <Categories />
+            </div>
+          )}
+
+          {/* Main Content Area */}
+          <div className="flex-1  md:">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/product" element={<Product />} />
@@ -36,7 +46,10 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/product/electronics" element={<ElectronicsProduct />} />
+              <Route
+                path="/product/electronics"
+                element={<ElectronicsProduct />}
+              />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/product/fashion" element={<FashionProduct />} />
               <Route path="/product/sports" element={<Sports />} />

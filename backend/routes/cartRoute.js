@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/add', authMiddleware, addToCart);
 router.get('/', authMiddleware, getCart);
-router.get('/:userId', getCartByUserId);
+// router.get('/:userId', getCartByUserId);
 router.delete('/:productId', authMiddleware, removeFromCart);
 
 module.exports = router;

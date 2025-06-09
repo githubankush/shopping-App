@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import allProducts from '../data/allProducts';
 import { motion } from 'framer-motion';
 import { useCart } from "../context/CartContext";
+import AddToCartButton from '../components/AddToCartButton';
 const ProductDetail = () => {
   const { id } = useParams();
   const [addedToCart, setAddedToCart] = React.useState(false);
-  const { addToCart } = useCart();
+
 
   // Normalize ID for matching
   const products = allProducts.map(product => ({
@@ -19,14 +20,7 @@ const ProductDetail = () => {
   if (!product) return <div className="p-6 text-center">Product not found</div>;
   const { name, image, price, review, rating, description } = product;
 
-    const submitHandler = () => {
-    // Handle the add to cart functionality here
-    addToCart(product); 
-    alert(`${name} added to cart!`);
-    console.log(`${name} added to cart!`);
-    setAddedToCart(true);
-    // You can also implement additional logic here, like updating a cart state or making an API call to save the item in the database
-    };
+    
 
   return (
     <motion.div
@@ -34,7 +28,7 @@ const ProductDetail = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="h-[500px] flex flex-col justify-between border-gray-200  rounded-lg shadow-md p-4 hover:border-b4 transition duration-300 text-white "
+          className="h-[500px] flex flex-col justify-between border-gray-200  rounded-lg shadow-md p-4 hover:border-b4 transition duration-300  "
         >
    
      
@@ -44,10 +38,10 @@ const ProductDetail = () => {
         className="w-full h-40 object-cover rounded-md"
       />
 
-      <div>
+      <div className='text-black'>
         <div className="flex-1 mt-2">
         <h2 className="text-lg font-semibold">{name}</h2>
-        <p className="text-sm text-gray-300 line-clamp-3">{description}</p>
+        <p className="text-sm text-gray-900 line-clamp-3">{description}</p>
       </div>
 
       <div className="mt-2">
@@ -56,8 +50,9 @@ const ProductDetail = () => {
           {"★".repeat(Math.floor(rating))}{"☆".repeat(5 - Math.floor(rating))}
           <span className="text-yellow-600 text-sm ml-2">({review})</span>
         </div>
-        <div className='flex justify-start items-start mt-4'>
-          <button onClick={submitHandler} className={` bg-[#6d28d9] hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-4 }`}>Add to Cart</button>
+        <div className='w-1/2 lg:w-1/4 md:w-1/3  mt-4'>
+          {/* <button onClick={submitHandler} className={` bg-[#6d28d9] hover:bg-green-600 text-white font-bold py-2 px-4 rounded mt-4 }`}>Add to Cart</button> */}
+          <AddToCartButton product={product} />
         </div>
       </div>
       </div>
