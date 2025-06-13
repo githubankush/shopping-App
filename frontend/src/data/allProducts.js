@@ -4,7 +4,7 @@ const allProducts = [
     "$oid": "6841553c1968e5e010b0f7b4"
   },
   "name": "Sony WH-1000XM5 Headphones",
-  "image": "https://example.com/images/sony-headphones.jpg",
+  "image": "https://www.sony.co.in/image/ea36f91f1b092b1e1940d80f066ae93a?fmt=png-alpha&wid=1014&hei=396",
   "price": 29999,
   "review": "Top-notch noise cancellation and sound quality.",
   "rating": 4.8,
@@ -15,7 +15,7 @@ const allProducts = [
     "$oid": "6841553c1968e5e010b0f7b5"
   },
   "name": "Samsung Galaxy Tab S9",
-  "image": "https://example.com/images/samsung-tab-s9.jpg",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV-DlVV3P9DhiAkv4mMzjkXon05u53uueKxw&s",
   "price": 57999,
   "review": "Great for productivity and entertainment.",
   "rating": 4.6,
@@ -26,7 +26,7 @@ const allProducts = [
     "$oid": "6841553c1968e5e010b0f7b6"
   },
   "name": "Dell XPS 13 Laptop",
-  "image": "https://example.com/images/dell-xps-13.jpg",
+  "image": "https://serverbazar.in/wp-content/uploads/2024/11/dell-xps-2-in-1.jpg",
   "price": 99999,
   "review": "Compact and powerful ultrabook.",
   "rating": 4.7,
@@ -37,7 +37,7 @@ const allProducts = [
     "$oid": "6841553c1968e5e010b0f7b7"
   },
   "name": "Canon EOS R10 Mirrorless Camera",
-  "image": "https://example.com/images/canon-eos-r10.jpg",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzi9bmaGAjT-TcDKGtbiEkWLr8dSM-F_Kv9A&s",
   "price": 81990,
   "review": "Excellent for beginners and travel photography.",
   "rating": 4.5,
@@ -48,7 +48,7 @@ const allProducts = [
     "$oid": "6841553c1968e5e010b0f7b8"
   },
   "name": "Apple Watch Series 9",
-  "image": "https://example.com/images/apple-watch-9.jpg",
+  "image": "https://suprememobiles.in/cdn/shop/files/Apple_Watch_Series_9_Built-in_GPS_for_accurate_tracking.webp?v=1739795948",
   "price": 41900,
   "review": "Perfect for iPhone users and fitness tracking.",
   "rating": 4.9,
@@ -59,7 +59,7 @@ const allProducts = [
     "$oid": "6841553c1968e5e010b0f7b9"
   },
   "name": "Logitech MX Master 3S Mouse",
-  "image": "https://example.com/images/logitech-mx-master-3s.jpg",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn6eZNU0JOCU3CeFohDumq2kEKnWbIE3RzCg&s",
   "price": 8995,
   "review": "Best productivity mouse on the market.",
   "rating": 4.8,
@@ -70,7 +70,7 @@ const allProducts = [
     "$oid": "6841553c1968e5e010b0f7ba"
   },
   "name": "HP DeskJet 4178 All-in-One Printer",
-  "image": "https://example.com/images/hp-deskjet.jpg",
+  "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm9EoPQvUy-cZ7vS2FD4CPggffckC2JA-gPA&s",
   "price": 6999,
   "review": "Great value for home use.",
   "rating": 4.3,
