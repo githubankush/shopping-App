@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from '../axios';
+import { useCart } from "../context/CartContext";
+import toast from "react-hot-toast";
 
 const AddToCartButton = ({ product }) => {
+  const { fetchCart } = useCart();
   const handleAddToCart = async () => {
     try {
       const cleanedProduct = {
@@ -18,7 +21,9 @@ const AddToCartButton = ({ product }) => {
         { withCredentials: true }
       );
 
-      alert(`${product.name} added to cart!`);
+      // alert(`${product.name} added to cart!`);
+      toast.success(`${product.name} added to cart!`);
+      await fetchCart(); // ✅ Update global cart
     } catch (err) {
       console.error("Error adding to cart:", err.response?.data || err.message);
       alert("Failed to add item to cart.");

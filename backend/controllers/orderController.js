@@ -35,3 +35,17 @@ exports.checkout = async (req, res) => {
     res.status(500).json({ message: 'Checkout failed', error: err.message });
   }
 };
+
+exports.getUserOrders = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const orders = await Order.find({ userId })
+      .sort({ createdAt: -1 }); // most recent first
+
+    res.status(200).json(orders);
+  } catch (err) {
+    console.error("Get Orders Error:", err);
+    res.status(500).json({ message: "Failed to fetch orders", error: err.message });
+  }
+};

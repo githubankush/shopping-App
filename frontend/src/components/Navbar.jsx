@@ -4,9 +4,12 @@ import { FaBars, FaTimes, FaShoppingCart, FaUser } from "react-icons/fa";
 import Logo from "../utils/Logo";
 import SearchBar from "../utils/SearchBar";
 import { useAuth } from "../context/AuthContext";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const { user } = useAuth();
+  const {cart} = useCart();
+  const cartItemCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
@@ -70,9 +73,11 @@ const Navbar = () => {
             className="relative hover:text-yellow-300 transition"
           >
             <FaShoppingCart size={22} />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-xs px-1 rounded-full">
-              {user?.cart?.length || 0}
-            </span>
+            {cartItemCount > 0 && (
+        <span className="absolute -top-2 -right-2 bg-red-500 text-xs px-1 rounded-full">
+          {cartItemCount}
+        </span>
+      )}
           </Link>
         </div>
 

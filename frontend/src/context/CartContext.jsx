@@ -1,48 +1,27 @@
-// src/context/CartContext.jsx
+// context/CartContext.jsx
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import axios from '../axios';
-import { useAuth } from './AuthContext';
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const auth = useAuth();
-  const authUser = auth?.authUser;
+  const [cart, setCart] = useState(null);
 
-  const [cart, setCart] = useState([]);
-
-  // Fetch user's cart when authUser changes
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        if (authUser?._id) {
-          const res = await axios.get(`/api/cart/${authUser._id}`, { withCredentials: true });
-          setCart(res?.data?.cartItems || []);
-        }
-      } catch (err) {
-        console.error("Error fetching cart:", err);
-      }
-    };
-
-    fetchCart();
-  }, [authUser]);
-
-  // Add to cart
-  const addToCart = async (product) => {
+  const fetchCart = async () => {
     try {
-      const res = await axios.post(
-        `/api/cart/add`,
-        { userId: authUser._id, product },
-        { withCredentials: true }
-      );
-      setCart(res?.data?.cartItems || []);
+      const res = await axios.get('/api/cart', { withCredentials: true });
+      setCart(res.data);
     } catch (err) {
-      console.error("Add to cart failed:", err);
+      console.error("Failed to fetch cart:", err);
     }
   };
 
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ cart, setCart, fetchCart }}>
       {children}
     </CartContext.Provider>
   );

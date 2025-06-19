@@ -3,6 +3,7 @@ import axios from "../axios";
 import toast from "react-hot-toast";
 
 const Cart = () => {
+
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -48,6 +49,7 @@ const Cart = () => {
       );
       setCart(res.data);
       toast.success("Item removed from cart");
+      await fetchCart(); // Refresh cart after removal
     } catch (err) {
       console.error("Remove error:", err);
       toast.error("Failed to remove item");
