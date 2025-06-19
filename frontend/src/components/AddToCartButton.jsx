@@ -1,39 +1,34 @@
-import React from "react";
-import axios from "../axios";
+import React from 'react';
+import axios from '../axios';
 
-const AddToCartButton = ({ productId }) => {
-
-  const handleAdd = async () => {
-    console.log("🚀 Sending to /api/cart/add:", {
-      productId, // This should be a string now
-      quantity: 1
-    });
-  console.log("🚀 Sending productId:", typeof productId, productId);
+const AddToCartButton = ({ product }) => {
+  const handleAddToCart = async () => {
     try {
-     const res =  await axios.post(
-        "/api/cart/add",
-        { productId, quantity: 1 },
+      const cleanedProduct = {
+        ...product,
+        _id: product._id?.$oid || product._id?.toString?.() || product._id
+      };
+
+      const response = await axios.post(
+        '/api/cart/add',
+        {
+          product: cleanedProduct,
+          quantity: 1
+        },
         { withCredentials: true }
       );
-      console.log("🚀 Response from /api/cart/add:", res.data);
-      console.log("🚀 Response status:", res.status);
-      console.log("🚀 productId:", productId);
-      // Assuming the response contains the updated cart or confirmation
-      console.log("✅ Successfully added to cart:", res.data);
-      alert("Added to cart!");
+
+      alert(`${product.name} added to cart!`);
     } catch (err) {
-      console.error("❌ Error adding to cart:", err);
-      alert(
-        "Error adding to cart: " +
-          (err.response?.data?.message || "Unknown error")
-      );
+      console.error("Error adding to cart:", err.response?.data || err.message);
+      alert("Failed to add item to cart.");
     }
   };
 
   return (
     <button
-      onClick={handleAdd}
-      className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-800 transition duration-300 w-full"
+      onClick={handleAddToCart}
+      className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1.5 px-4 rounded-lg text-sm"
     >
       Add to Cart
     </button>

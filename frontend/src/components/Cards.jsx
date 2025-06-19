@@ -1,29 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useCart } from "../context/CartContext";
-import axios from '../axios';
-import AddToCartButton from './AddToCartButton';
+import React from "react";
+import { motion } from "framer-motion";
+import AddToCartButton from "./AddToCartButton";
 
 const Cards = ({ product }) => {
   const { name, image, price, review, rating, description } = product;
-  const { addToCart } = useCart();
-
-  const submitHandler = async () => {
-    try {
-      await axios.post(
-        '/api/cart/add',
-        {
-          productId: product._id,
-          quantity: 1,
-        },
-        { withCredentials: true }
-      );
-      alert(`${product.name} added to cart!`);
-    } catch (err) {
-      console.error(err);
-      alert("Error adding to cart");
-    }
-  };
 
   return (
     <motion.div
@@ -49,12 +29,19 @@ const Cards = ({ product }) => {
           </p>
 
           <div className="text-yellow-500 text-sm">
-            {"★".repeat(Math.floor(rating))}{"☆".repeat(5 - Math.floor(rating))}
+            {"★".repeat(Math.floor(rating))}
+            {"☆".repeat(5 - Math.floor(rating))}
             <span className="text-yellow-600 text-xs ml-1">({review})</span>
           </div>
 
           <div className="mt-4">
-            <AddToCartButton productId={product._id?.$oid || product._id?.toString?.() || product._id} />
+            <AddToCartButton
+              product={{
+                ...product,
+                _id:
+                  product._id?.$oid || product._id?.toString?.() || product._id,
+              }}
+            />
           </div>
         </div>
       </div>

@@ -1,10 +1,13 @@
 // backend/server.js
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoute');
 const cartRoutes = require('./routes/cartRoute'); 
+const paymentRoutes = require('./routes/paymentRoute');
+const orderRoutes = require('./routes/orderRoute');
 const connectDB = require('./config/db');
 dotenv.config();
 const app = express();
@@ -21,6 +24,9 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', userRoutes);
 app.use('/api/cart', cartRoutes); // Add cart routes 
+app.use('/api/payment',paymentRoutes); // Add payment routes
+app.use('/api/order', orderRoutes); // Add order routes);
+
 
 const PORT = process.env.PORT || 5000;
 
