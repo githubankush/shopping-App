@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"; // 🛣️ Importing useNavigate for navigation
 import axios from "../axios"; // 🛣️ Importing axios for API calls
 import { useAuth } from "../context/AuthContext"; // 🛣️ Importing AuthContext to access auth state
+import toast from "react-hot-toast";
 const Login = () => {
 
   const { setUser } = useAuth(); // 🛣️ Accessing setUser from AuthContext to update auth state
@@ -30,10 +31,12 @@ const Login = () => {
     Navigate('/');
     setUser(res.data); // Set auth user
     alert("Login Successful!");
+    toast.success("Login Successful!"); // 🛣️ Show success message
     console.log("User Data:", res.data);
   } catch (err) {
     console.error("Login Error:", err);
     alert(err?.response?.data?.message || "Login failed. Try again.");
+    toast.error(err?.response?.data?.message || "Login failed. Try again."); // 🛣️ Show error message
   }
 };
 

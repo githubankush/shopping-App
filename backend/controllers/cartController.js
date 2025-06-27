@@ -63,7 +63,6 @@ exports.addToCart = async (req, res) => {
 
 exports.getCart = async (req, res) => {
   try {
-    console.log("Fetching cart for user:", req.user._id);
 
     const cart = await Cart.findOne({ userId: req.user._id }).populate({
       path: 'items.productId',
@@ -71,7 +70,6 @@ exports.getCart = async (req, res) => {
       select: 'name price image description',
     });
 
-    console.log("Fetched Cart:", cart);
 
     if (!cart) {
       return res.status(404).json({ message: 'Cart not found' });

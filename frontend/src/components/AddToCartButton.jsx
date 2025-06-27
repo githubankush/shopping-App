@@ -33,7 +33,7 @@ const AddToCartButton = ({ product }) => {
   return (
     <button
       onClick={handleAddToCart}
-      className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1.5 px-4 rounded-lg text-sm"
+      className="bg-purple-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg text-sm"
     >
       Add to Cart
     </button>

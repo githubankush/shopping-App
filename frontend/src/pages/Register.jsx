@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -19,11 +20,13 @@ const Register = () => {
     try {
       const response = await axios.post("/api/auth/register", formData);
       alert("Registration successful!");
+      toast.success("Registration successful!");
       console.log(response.data);
       navigate("/login");
     } catch (error) {
       console.error("Registration error:", error);
       alert(error?.response?.data?.message || "Registration failed. Please try again.");
+      toast.error(error?.response?.data?.message || "Registration failed. Please try again.");
     }
   };
 

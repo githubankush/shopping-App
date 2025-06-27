@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "../axios"; // Axios instance with baseURL
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast"; 
 const Logout = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
@@ -9,6 +10,7 @@ const Logout = () => {
       localStorage.removeItem("authUser"); // or useContext if you're using context
       navigate("/login"); // Redirect to login page after logout
       alert("Logout Successful!");
+      toast.success("Logout Successful!");
     } catch (error) {
       console.error("Logout failed:", error);
     }

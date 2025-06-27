@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaShoppingCart, FaUser } from "react-icons/fa";
 import Logo from "../utils/Logo";
@@ -7,8 +7,8 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
-  const { user } = useAuth();
-  const {cart} = useCart();
+  const { user} = useAuth();
+  const {cart, fetchCart} = useCart();
   const cartItemCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -18,6 +18,12 @@ const Navbar = () => {
     { name: "Product", path: "/product" },
     { name: "About", path: "/about" },
   ];
+   
+  useEffect(() => {
+    fetchCart(); // Fetch cart items on mount
+  }
+  , [fetchCart]);
+  
 
   const isActive = (path) => location.pathname.startsWith(path);
 
