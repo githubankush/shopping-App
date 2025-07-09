@@ -8,7 +8,9 @@ const userRoutes = require('./routes/userRoute');
 const cartRoutes = require('./routes/cartRoute'); 
 const paymentRoutes = require('./routes/paymentRoute');
 const orderRoutes = require('./routes/orderRoute');
+const checkoutRoutes = require('./routes/checkoutRoute');
 const connectDB = require('./config/db');
+const adminRoutes = require('./routes/adminRoutes');
 dotenv.config();
 const app = express();
 app.use(cors({
@@ -26,8 +28,9 @@ app.use('/api/auth', userRoutes);
 app.use('/api/cart', cartRoutes); 
 app.use('/api/payment',paymentRoutes); 
 app.use('/api/order', orderRoutes); 
-
-
+app.use('/api/checkout', checkoutRoutes);
+// Admin routes
+app.use('/api/admin', adminRoutes);
 const PORT = process.env.PORT || 5000;
 
 connectDB().then(() => {

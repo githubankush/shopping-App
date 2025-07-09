@@ -16,13 +16,15 @@ import Cart from "./pages/Cart";
 import { CartProvider } from "./context/CartContext";
 import Profile from "./pages/Profile";
 import Error from "./pages/Error";
+import AdminRoutes from "./AdminRoutes";
+
 
 const App = () => {
   const location = useLocation();
   const isProductPage = location.pathname.startsWith("/product");
 
   return (
-    <CartProvider>
+    <>
       <div className="min-h-screen bg-[#6d28d9]">
         {/* Navbar (always on top) */}
         <Navbar />
@@ -55,11 +57,15 @@ const App = () => {
               <Route path="/product/sports" element={<Sports />} />
               <Route path="/product/homekitchen" element={<HomeKitchen />} />
               <Route path="*" element={<Error />} />
+
+              {/* 🔐 Admin section */}
+              <Route path="/admin/*" element={<AdminRoutes />} />
+
             </Routes>
           </div>
         </div>
       </div>
-    </CartProvider>
+    </>
   );
 };
 

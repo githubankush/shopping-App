@@ -3,7 +3,6 @@ import axios from "../axios";
 import toast from "react-hot-toast";
 
 const Cart = () => {
-
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -78,12 +77,28 @@ const Cart = () => {
         name: "Shoppy",
         description: "Order Payment",
         order_id: razorpayOrder.id,
-        handler: async function (response) {
-          toast.success("Payment Successful!");
-          await axios.post("/api/checkout", {}, { withCredentials: true });
-          toast.success("Order placed!");
-          fetchCart(); // refresh cart
-        },
+       handler: async function (response) {
+        console.log("💸 Razorpay payment successful:", response);
+          try {
+            const checkoutRes = await axios.post(
+              "/api/checkout",
+              {
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpayOrderId: response.razorpay_order_id,
+                razorpaySignature: response.razorpay_signature,
+              },
+              { withCredentials: true }
+            );
+
+            console.log("✅ Checkout response:", checkoutRes.data);
+            toast.success("Order placed!");
+            fetchCart();
+
+          } catch (error) {
+            console.error("❌ Checkout API failed:", error.response?.data || error.message);
+            toast.error("Order placement failed.");
+          }
+      },
         prefill: {
           name: "Customer",
           email: "test@example.com",
@@ -93,12 +108,19 @@ const Cart = () => {
         },
       };
 
+      
       const rzp = new window.Razorpay(options);
+      
+      rzp.on("payment.failed", function (response) {
+      console.error("💥 Payment Failed", response.error);
+      toast.error("Payment failed. Please try again.");});
+
       rzp.open();
-    } catch (err) {
-      console.error(err);
-      toast.error("Checkout failed");
-    }
+    } catch (error) {
+  console.error("❌ CHECKOUT FAILED:", error.response?.data || error.message);
+  toast.error("Order placement failed.");
+}
+
   };
 
   if (!cart || !cart.items) {

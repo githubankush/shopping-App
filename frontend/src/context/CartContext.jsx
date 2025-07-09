@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
       console.error("Failed to fetch cart:", err);
     }
   };
-
+ 
   useEffect(() => {
     fetchCart();
   }, []);
