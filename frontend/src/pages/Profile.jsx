@@ -15,6 +15,7 @@ const Profile = () => {
         const res = await axios.get("/api/order/user", {
           withCredentials: true,
         });
+        console.log("Fetched orders:", res.data);
         setOrders(res.data);
       } catch (err) {
         console.error("Error fetching orders:", err.response?.data || err.message);
@@ -86,9 +87,13 @@ const Profile = () => {
 
                 <div className="mt-4 space-y-1 text-sm text-gray-700">
                   {order.items.map((item, idx) => (
+                    <>
+                    <img className="w-20 h-20 rounded-lg object-cover mb-2" src={`${item.productId?.image}`} alt="image" />
                     <p key={idx}>
                       • <span className="font-medium">{item.productId?.name || "Product"}</span> × {item.quantity} @ ₹{item.productId?.price || 0}
                     </p>
+                    
+                    </>
                   ))}
                 </div>
 

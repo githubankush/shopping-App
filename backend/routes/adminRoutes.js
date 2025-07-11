@@ -5,6 +5,7 @@ const {
   deleteUser,
   getAllOrders,
   updateOrderStatus,
+  deleteOrder,
   getAllProducts,
   createProduct,
   updateProduct,
@@ -23,6 +24,7 @@ router.get("/test", authMiddleware, isAdmin, (req, res) => {
 // ORDER
 router.get("/orders", authMiddleware, isAdmin, getAllOrders);
 router.put("/order/:id/status", authMiddleware, isAdmin, updateOrderStatus);
+router.delete("/order/:id", authMiddleware, isAdmin, deleteOrder);
 
 // PRODUCT
 router.get("/products", authMiddleware, isAdmin, getAllProducts);

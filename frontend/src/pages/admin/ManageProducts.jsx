@@ -9,6 +9,9 @@ const ManageProducts = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
+    category: "",
+    description: "",
+    image: "",
     stock: ""
   });
 
@@ -81,6 +84,9 @@ const ManageProducts = () => {
     setFormData({
       name: product.name,
       price: product.price,
+      category: product.category,
+      description: product.description,
+      image: product.image,
       stock: product.stock,
     });
   };
@@ -185,6 +191,30 @@ const ManageProducts = () => {
                   value={formData.price}
                   onChange={handleFormChange}
                   placeholder="Price"
+                  className="w-full px-4 py-2 border rounded"
+                />
+                <input
+                  type="text"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleFormChange}
+                  placeholder="category"
+                  className="w-full px-4 py-2 border rounded"
+                />
+                <input
+                  type="text"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleFormChange}
+                  placeholder="description"
+                  className="w-full px-4 py-2 border rounded"
+                />
+                <input
+                  type="text"
+                  name="image"
+                  value={formData.image}
+                  onChange={handleFormChange}
+                  placeholder="image URL"
                   className="w-full px-4 py-2 border rounded"
                 />
                 <input

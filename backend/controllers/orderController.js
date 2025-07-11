@@ -79,7 +79,7 @@ exports.getUserOrders = async (req, res) => {
       console.log("🛒 Fetching orders for user:", req.user); 
     const userId = new mongoose.Types.ObjectId(req.user._id);
 
-    const orders = await Order.find({ userId }).populate("items.productId");
+    const orders = await Order.find({ userId }).populate("items.productId").sort({ createdAt: -1 });
 
     console.log("📦 Orders found:", orders.length);
     res.status(200).json(orders);

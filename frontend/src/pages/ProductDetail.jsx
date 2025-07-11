@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import allProducts from '../data/allProducts';
 import { motion } from 'framer-motion';
 import AddToCartButton from '../components/AddToCartButton';
+import axios from '../axios';
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  // Normalize products to ensure valid _id strings
-  const products = allProducts.map(product => ({
-    ...product,
-    _id: product._id?.$oid || product._id?.toString?.() || product._id,
-    id: product._id?.$oid || product._id?.toString?.() || product._id
-  }));
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`/api/product/${id}`); // Adjust the URL if needed
+        setProduct(res.data);
+        console.log('📦 Product fetched:', res.data);
+      } catch (err) {
+        console.error('❌ Error fetching product:', err);
+        setError(err.response?.data?.message || 'Failed to load product');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const product = products.find(p => p.id === id);
+    fetchProduct();
+  }, [id]);
 
-  if (!product) {
-    return <div className="p-6 text-center text-red-500 font-semibold">Product not found</div>;
-  }
+  if (loading) return <div className="text-center p-6">Loading...</div>;
+  if (error) return <div className="text-center text-red-500 p-6">{error}</div>;
+  if (!product) return <div className="text-center text-red-500 p-6">Product not found</div>;
 
   const { name, image, price, review, rating, description } = product;
 
@@ -43,13 +54,12 @@ const ProductDetail = () => {
         <div className="text-lg font-bold text-green-600">₹{price}</div>
 
         <div className="text-yellow-500">
-          {"★".repeat(Math.floor(rating))}{"☆".repeat(5 - Math.floor(rating))}
+          {'★'.repeat(Math.floor(rating))}{'☆'.repeat(5 - Math.floor(rating))}
           <span className="text-yellow-600 text-sm ml-2">({review})</span>
         </div>
 
         <div className="mt-4 w-full sm:w-1/2 md:w-1/3">
-          {/* ✅ Passing cleaned _id and full product */}
-          <AddToCartButton product={{ ...product, _id: product._id }} />
+          <AddToCartButton product={product} />
         </div>
       </div>
     </motion.div>

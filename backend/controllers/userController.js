@@ -110,5 +110,6 @@ const logout = (req, res) => {
   res.status(200).json({ message: "User logged out successfully" });
 };
 
+
 module.exports = { register, login, profile,logout };
 // This code handles user registration and login functionality.

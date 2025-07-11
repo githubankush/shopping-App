@@ -37,15 +37,26 @@ exports.getAllOrders = async (req, res) => {
 // ✅ Update order status
 exports.updateOrderStatus = async (req, res) => {
   try {
-    const { orderId } = req.params;
+    const { id } = req.params;  // ✅ FIXED: use "id" not "orderId"
     const { status } = req.body;
 
-    const order = await Order.findByIdAndUpdate(orderId, { status }, { new: true });
+    const order = await Order.findByIdAndUpdate(id, { status }, { new: true });
     if (!order) return res.status(404).json({ message: "Order not found" });
 
     res.status(200).json({ message: "Order status updated", order });
   } catch (err) {
     res.status(500).json({ message: "Failed to update order", error: err.message });
+  }
+};
+
+// ✅ Delete an order by ID
+exports.deleteOrder = async (req, res) => {
+  try {
+    const {id} = req.params;
+    await Order.findByIdAndDelete(id);
+    res.status(200).json({ message: "Order deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete order", error: err.message });
   }
 };
 

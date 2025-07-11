@@ -11,6 +11,7 @@ const orderRoutes = require('./routes/orderRoute');
 const checkoutRoutes = require('./routes/checkoutRoute');
 const connectDB = require('./config/db');
 const adminRoutes = require('./routes/adminRoutes');
+const productRoutes = require("./routes/productRoutes");
 dotenv.config();
 const app = express();
 app.use(cors({
@@ -29,6 +30,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/payment',paymentRoutes); 
 app.use('/api/order', orderRoutes); 
 app.use('/api/checkout', checkoutRoutes);
+app.use('/api/product', productRoutes);
 // Admin routes
 app.use('/api/admin', adminRoutes);
 const PORT = process.env.PORT || 5000;

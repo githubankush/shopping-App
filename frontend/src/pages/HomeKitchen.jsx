@@ -1,8 +1,17 @@
 import React from 'react';
 import Cards from '../components/Cards';
-import homeKitchenProducts from '../data/homeKitchenProducts.js'; // Update path as needed
+import { useEffect } from 'react';
+import axios from '../axios'; // Adjust the path to match your axios instance
 
 const HomeKitchen = () => {
+  const [homeKitchenProducts, setProducts] = React.useState([]);
+  useEffect(() => {
+    const fetchHomeKitchenProducts = async () => {
+      const { data } = await axios.get("/api/product?category=home-kitchen");
+      setProducts(data);
+    };
+    fetchHomeKitchenProducts();
+  }, []);
   return (
     <div className='flex flex-wrap gap-6 justify-start p-4'>
       {homeKitchenProducts.map((product, index) => (

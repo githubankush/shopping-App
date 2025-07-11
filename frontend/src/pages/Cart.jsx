@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { FaAngleLeft, FaAngleRight, FaTimes } from "react-icons/fa";
 
 const Cart = () => {
   const [cart, setCart] = useState(null);
@@ -129,13 +131,39 @@ const Cart = () => {
 
   return (
     <div className="p-4 max-w-5xl mx-auto">
+      
+
       <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-black">
         Your Cart
       </h2>
 
       {cart.items.length === 0 ? (
-        <p className="text-center text-gray-700">Your cart is empty.</p>
-      ) : (
+      <div className="flex flex-col items-center justify-center p-6 text-center space-y-6">
+        <h2 className="text-2xl font-semibold text-gray-800">Your cart is empty 🛒</h2>
+        <p className="text-gray-600">Looks like you haven't added anything yet.</p>
+
+        <div className="space-y-4">
+          <div>
+            <p className="text-gray-700 mb-1">Want to check your past orders?</p>
+            <Link
+              to="/profile"
+              className="text-blue-600 hover:underline font-medium"
+            >
+              View Orders
+            </Link>
+          </div>
+
+          <div>
+            <Link
+              to="/product"
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md transition duration-200"
+            >
+              🛍️ Continue Shopping
+            </Link>
+          </div>
+        </div>
+      </div>
+        ) : (
         <div className="space-y-6">
           {cart.items.map((item) => {
             const product = item.productId;
