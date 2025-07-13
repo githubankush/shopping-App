@@ -140,7 +140,6 @@ const Cart = () => {
       {cart.items.length === 0 ? (
       <div className="flex flex-col items-center justify-center p-6 text-center space-y-6">
         <h2 className="text-2xl font-semibold text-gray-800">Your cart is empty 🛒</h2>
-        <p className="text-gray-600">Looks like you haven't added anything yet.</p>
 
         <div className="space-y-4">
           <div>

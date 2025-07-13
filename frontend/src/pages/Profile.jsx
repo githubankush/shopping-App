@@ -66,10 +66,10 @@ const Profile = () => {
                   Placed on: {moment(order.createdAt).format("MMMM Do YYYY, h:mm A")}
                 </p>
 
-                <div className="text-sm mt-2">
-                  <p className="text-gray-600">
+                <div className="text-sm mt-2 text-gray-600">
+                  <p className="text-gray-600 flex items-center gap-1 ">
                     Status:{" "}
-                    <span className={`font-semibold ${order.status === "Processing"
+                    <span className={`font-semibold  ${order.status === "Processing"
                         ? "text-yellow-600"
                         : order.status === "Shipped"
                           ? "text-blue-600"

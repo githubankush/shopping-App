@@ -1,17 +1,22 @@
 import React from 'react';
 import axios from '../axios';
 import { useCart } from "../context/CartContext";
+import {useAuth } from "../context/AuthContext"; // 🛣️ Importing user context to access user data
 import toast from "react-hot-toast";
 
 const AddToCartButton = ({ product }) => {
   const { fetchCart } = useCart();
+  const { user } = useAuth(); // 🛣️ Accessing user from AuthContext
   const handleAddToCart = async () => {
     try {
       const cleanedProduct = {
         ...product,
         _id: product._id?.$oid || product._id?.toString?.() || product._id
       };
-
+      if (!user) {
+        alert("Please log in to add items to your cart.");
+        return;
+      }
       const response = await axios.post(
         '/api/cart/add',
         {
