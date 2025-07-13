@@ -6,7 +6,7 @@ import moment from "moment";
 import { FaUser, FaBox, FaRupeeSign, FaCheck, FaTimes, FaShippingFast } from "react-icons/fa";
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user,loading } = useAuth();
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -25,6 +25,9 @@ const Profile = () => {
     if (user) fetchOrders();
   }, [user]);
 
+  if (loading) {
+    return <h1 className="flex items-center justify-center h-screen text-white text-2xl font-semibold">Loading...</h1>;
+  }
   if (!user) {
     return (
       <h1 className="flex items-center justify-center h-screen text-white text-2xl font-semibold">
