@@ -5,12 +5,9 @@ const mongoose = require("mongoose");
 
 exports.checkout = async (req, res) => {
   try {
-    console.log("▶️ CHECKOUT initiated");
-
     // Check user ID
     const userId = req.user?._id;
     if (!userId) {
-      console.error("❌ No user ID in request");
       return res.status(401).json({ message: "Unauthorized: No user ID" });
     }
 
@@ -24,7 +21,6 @@ exports.checkout = async (req, res) => {
 
     const { razorpayPaymentId, razorpayOrderId, razorpaySignature } = req.body;
     if (!razorpayPaymentId || !razorpayOrderId || !razorpaySignature) {
-      console.error("❌ Razorpay payment details missing");
       return res.status(400).json({ message: "Incomplete Razorpay details" });
     }
 
@@ -63,7 +59,6 @@ exports.checkout = async (req, res) => {
     cart.items = [];
     await cart.save();
 
-    console.log("✅ Order created:", order._id);
     res.status(201).json({ message: "Order placed successfully", order });
 
   } catch (err) {
@@ -76,12 +71,10 @@ exports.checkout = async (req, res) => {
 
 exports.getUserOrders = async (req, res) => {
   try {
-      console.log("🛒 Fetching orders for user:", req.user); 
     const userId = new mongoose.Types.ObjectId(req.user._id);
 
     const orders = await Order.find({ userId }).populate("items.productId").sort({ createdAt: -1 });
 
-    console.log("📦 Orders found:", orders.length);
     res.status(200).json(orders);
   } catch (error) {
     console.error("❌ Error fetching orders:", error);

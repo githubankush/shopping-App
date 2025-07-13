@@ -3,9 +3,6 @@ const razorpay = require('../config/razorpay');
 exports.createRazorpayOrder = async (req, res) => {
   const { amount } = req.body;
 
-  console.log("💰 Creating Razorpay Order. Amount:", amount);
-  console.log("🔑 User ID:", req.user?._id);
-
   const options = {
     amount: amount * 100, // convert to paise
     currency: "INR",

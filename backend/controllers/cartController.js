@@ -8,7 +8,6 @@ exports.addToCart = async (req, res) => {
   let { product, quantity = 1 } = req.body;
 
   if (!product || !product._id) {
-    console.log("Invalid product payload:", req.body);
     return res.status(400).json({ message: "Product with valid _id is required" });
   }
 
