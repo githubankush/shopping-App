@@ -15,7 +15,7 @@ const productRoutes = require("./routes/productRoutes");
 dotenv.config();
 const app = express();
 app.use(cors({
-    origin: 'https://shopping-app-iy47.vercel.app/',
+    origin: 'https://shopping-app-iy47.vercel.app',
     credentials: true // Allow cookies to be sent
 }));
 app.use(cookieParser());
