@@ -10,7 +10,6 @@ const Product = () => {
     const fetchProducts = async () => {
       try {
         const { data } = await axios.get("/api/product");
-        console.log("Fetched products:", data); // Debugging line to check fetched data
         const shuffled = [...data].sort(() => Math.random() - 0.5); // optional
         setFilteredProducts(shuffled);
       } catch (err) {
