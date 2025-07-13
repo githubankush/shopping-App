@@ -28,11 +28,12 @@ const Login = () => {
       throw new Error("No response from server");
     }
 
-    Navigate('/');
+    
     setUser(res.data); // Set auth user
     alert("Login Successful!");
     toast.success("Login Successful!"); // 🛣️ Show success message
     console.log("User Data:", res.data);
+    Navigate('/');
   } catch (err) {
     console.error("Login Error:", err);
     alert(err?.response?.data?.message || "Login failed. Try again.");
