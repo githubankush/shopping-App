@@ -6,14 +6,19 @@ import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { CartProvider } from './context/CartContext';
+import { LoadingProvider } from './context/LoadingContext.js';
+import Loading from './components/Loading.jsx';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Toaster position="top center" reverseOrder={false} />
     <AuthProvider>
     <CartProvider>
-    <BrowserRouter>
-       <App />
-    </BrowserRouter>
+      <LoadingProvider>
+        <BrowserRouter>
+          <Loading />
+          <App />
+        </BrowserRouter>
+      </LoadingProvider>
     </CartProvider>
     </AuthProvider>
 

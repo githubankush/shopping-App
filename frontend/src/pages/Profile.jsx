@@ -15,7 +15,6 @@ const Profile = () => {
         const res = await axios.get("/api/order/user", {
           withCredentials: true,
         });
-        console.log("Fetched orders:", res.data);
         setOrders(res.data);
       } catch (err) {
         console.error("Error fetching orders:", err.response?.data || err.message);

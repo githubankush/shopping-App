@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading }}>
-      {loading ? <p>Loading...</p> : children}
+      {loading ? <p className='text-center text-xl font-bold mt-10 '>Loading...</p> : children}
     </AuthContext.Provider>
   );
 };
