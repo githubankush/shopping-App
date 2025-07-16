@@ -22,7 +22,6 @@ const Login = () => {
   try {
     const res = await axios.post('/api/auth/login', formData, {
       withCredentials: true,
-    }, {
       metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
     });
 

@@ -9,7 +9,9 @@ const ManageUsers = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      await axios.delete(`/api/admin/user/${userId}`);
+      await axios.delete(`/api/admin/user/${userId}`, {
+      metadata: { showLoading: true },
+      });
       // Update the users list after deleting a user
       const updatedUsers = users.filter((user) => user._id !== userId);
       setUsers(updatedUsers);

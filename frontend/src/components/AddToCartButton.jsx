@@ -23,7 +23,9 @@ const AddToCartButton = ({ product }) => {
           product: cleanedProduct,
           quantity: 1
         },
-        { withCredentials: true }
+        { withCredentials: true ,
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    }
       );
 
       // alert(`${product.name} added to cart!`);

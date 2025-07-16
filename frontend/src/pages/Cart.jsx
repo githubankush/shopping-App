@@ -10,7 +10,7 @@ const Cart = () => {
 
   const fetchCart = async () => {
     try {
-      const res = await axios.get("/api/cart", { withCredentials: true }, {
+      const res = await axios.get("/api/cart", { withCredentials: true , 
       metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
     });
       setCart(res.data);
@@ -48,8 +48,8 @@ const Cart = () => {
       setLoading(true);
       const res = await axios.post(
         "/api/cart/remove",
-        { productId },
-        { withCredentials: true }, {
+        { productId ,
+        withCredentials: true , 
       metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
     }
       );
@@ -73,8 +73,8 @@ const Cart = () => {
     try {
       const { data: razorpayOrder } = await axios.post(
         "/api/payment/create-order",
-        { amount: total },
-        { withCredentials: true }, {
+        { amount: total ,
+         withCredentials: true , 
       metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
     }
       );
@@ -96,9 +96,9 @@ const Cart = () => {
                 razorpayOrderId: response.razorpay_order_id,
                 razorpaySignature: response.razorpay_signature,
               },
-              { withCredentials: true }, {
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
-    }
+              { withCredentials: true,
+                 metadata: { showLoading: true },
+              }
             );
 
             console.log("✅ Checkout response:", checkoutRes.data);
