@@ -18,7 +18,9 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/register", formData);
+      const response = await axios.post("/api/auth/register", formData, {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    });
       alert("Registration successful!");
       toast.success("Registration successful!");
       console.log(response.data);

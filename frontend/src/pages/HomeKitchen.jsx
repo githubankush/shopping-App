@@ -7,7 +7,9 @@ const HomeKitchen = () => {
   const [homeKitchenProducts, setProducts] = React.useState([]);
   useEffect(() => {
     const fetchHomeKitchenProducts = async () => {
-      const { data } = await axios.get("/api/product?category=home-kitchen");
+      const { data } = await axios.get("/api/product?category=home-kitchen", {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    });
       setProducts(data);
     };
     fetchHomeKitchenProducts();

@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -17,11 +18,18 @@ import { CartProvider } from "./context/CartContext";
 import Profile from "./pages/Profile";
 import Error from "./pages/Error";
 import AdminRoutes from "./AdminRoutes";
+import { useLoading } from "./context/LoadingContext";
+import { registerLoading } from "./utils/LoadingController";
 
 
 const App = () => {
   const location = useLocation();
   const isProductPage = location.pathname.startsWith("/product");
+  const { showLoading, hideLoading } = useLoading();
+
+  useEffect(() => {
+    registerLoading(showLoading, hideLoading);
+  }, []);
 
   return (
     <>

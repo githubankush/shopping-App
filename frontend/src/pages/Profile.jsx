@@ -14,7 +14,9 @@ const Profile = () => {
       try {
         const res = await axios.get("/api/order/user", {
           withCredentials: true,
-        });
+        }, {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    });
         setOrders(res.data);
       } catch (err) {
         console.error("Error fetching orders:", err.response?.data || err.message);

@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       try {
         const res = await axios.get('/api/auth/profile', { withCredentials: true });
         setUser(res.data);
-      } catch {
+      } catch(err) {
         setUser(null);
         console.error("Not logged in:", err.response?.data || err.message);
       } finally {

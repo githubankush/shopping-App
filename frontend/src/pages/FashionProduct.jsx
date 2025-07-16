@@ -10,7 +10,9 @@ const FashionProduct = () => {
   useEffect(()=>{
     const fetchFashionProducts = async () => {
       try {
-        const { data } = await axios.get("/api/product?category=fashion");
+        const { data } = await axios.get("/api/product?category=fashion", {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    });
         setFashionProducts(data);
       } catch (err) {
         console.error("Error loading fashion products:", err);

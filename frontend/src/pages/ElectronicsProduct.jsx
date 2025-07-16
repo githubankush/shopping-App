@@ -10,7 +10,9 @@ const ElectronicsProduct = () => {
   useEffect(() => {
     const fetchElectronics = async () => {
       try {
-        const { data } = await axios.get("/api/product?category=electronics");
+        const { data } = await axios.get("/api/product?category=electronics", {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    });
         setelectronicsProducts(data);
       } catch (err) {
         console.error("Error loading electronics:", err);

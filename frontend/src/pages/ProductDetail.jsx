@@ -13,7 +13,9 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await axios.get(`/api/product/${id}`); // Adjust the URL if needed
+        const res = await axios.get(`/api/product/${id}`, {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    }); // Adjust the URL if needed
         setProduct(res.data);
       } catch (err) {
         console.error('❌ Error fetching product:', err);

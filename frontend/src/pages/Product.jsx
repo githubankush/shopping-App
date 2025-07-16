@@ -9,7 +9,9 @@ const Product = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await axios.get("/api/product");
+        const { data } = await axios.get("/api/product", {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    });
         const shuffled = [...data].sort(() => Math.random() - 0.5); // optional
         setFilteredProducts(shuffled);
       } catch (err) {

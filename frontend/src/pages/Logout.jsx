@@ -6,7 +6,9 @@ const Logout = () => {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      await axios.get("/api/auth/logout", { withCredentials: true });
+      await axios.get("/api/auth/logout", { withCredentials: true }, {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    });
       localStorage.removeItem("authUser"); // or useContext if you're using context
       navigate("/login"); // Redirect to login page after logout
       alert("Logout Successful!");

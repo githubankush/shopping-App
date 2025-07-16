@@ -6,7 +6,9 @@ const Sports = () => {
   const [sportsProducts, setProducts] = React.useState([]); // ✅ useState to manage products
   useEffect(() => {
   const fetchSportsProducts = async () => {
-    const { data } = await axios.get("/api/product?category=sports");
+    const { data } = await axios.get("/api/product?category=sports", {
+      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+    });
     setProducts(data);
   };
   fetchSportsProducts();
