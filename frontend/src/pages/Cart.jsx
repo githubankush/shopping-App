@@ -3,18 +3,24 @@ import axios from "../axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { FaAngleLeft, FaAngleRight, FaTimes } from "react-icons/fa";
+import { useLoading } from "../context/LoadingContext";
 
 const Cart = () => {
+  const { showLoading, hideLoading } = useLoading();
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const fetchCart = async () => {
     try {
+      showLoading();
       const res = await axios.get("/api/cart", { withCredentials: true });
       setCart(res.data);
     } catch (err) {
       console.error("Error fetching cart:", err);
       toast.error("Failed to load cart");
+    }
+    finally {
+    hideLoading();
     }
   };
 
@@ -24,6 +30,7 @@ const Cart = () => {
 
   const updateQuantity = async (productId, type) => {
     try {
+      showLoading();
       setLoading(true);
       const res = await axios.post(
         "/api/cart/update-quantity",
@@ -36,12 +43,14 @@ const Cart = () => {
       console.error(err);
       toast.error("Failed to update quantity");
     } finally {
+      hideLoading();
       setLoading(false);
     }
   };
 
   const handleRemove = async (productId) => {
     try {
+      showLoading();
       setLoading(true);
       const res = await axios.post(
         "/api/cart/remove",
@@ -55,6 +64,7 @@ const Cart = () => {
       console.error("Remove error:", err);
       toast.error("Failed to remove item");
     } finally {
+      hideLoading();
       setLoading(false);
     }
   };
@@ -66,6 +76,7 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     try {
+      showLoading();
       const { data: razorpayOrder } = await axios.post(
         "/api/payment/create-order",
         { amount: total },
@@ -100,6 +111,9 @@ const Cart = () => {
             console.error("❌ Checkout API failed:", error.response?.data || error.message);
             toast.error("Order placement failed.");
           }
+           finally {
+            hideLoading();
+            }
       },
         prefill: {
           name: "Customer",
@@ -109,6 +123,7 @@ const Cart = () => {
           color: "#6d28d9",
         },
       };
+     
 
       
       const rzp = new window.Razorpay(options);

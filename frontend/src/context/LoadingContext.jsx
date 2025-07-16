@@ -1,21 +1,16 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { setLoaderFunctions } from "../utils/loaderControl"; // 🔗 Link to axios helper
+// src/context/LoadingContext.js
+import React, { createContext, useState, useContext } from "react";
 
 const LoadingContext = createContext();
 
 export const LoadingProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const showLoader = () => setIsLoading(true);
-  const hideLoader = () => setIsLoading(false);
-
-  useEffect(() => {
-    // register loader globally for axios to access
-    setLoaderFunctions(showLoader, hideLoader);
-  }, []);
+  const showLoading = () => setIsLoading(true);
+  const hideLoading = () => setIsLoading(false);
 
   return (
-    <LoadingContext.Provider value={{ isLoading, showLoader, hideLoader }}>
+    <LoadingContext.Provider value={{ isLoading, showLoading, hideLoading }}>
       {children}
     </LoadingContext.Provider>
   );

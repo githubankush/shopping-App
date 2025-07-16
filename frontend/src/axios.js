@@ -1,32 +1,24 @@
 import axios from "axios";
-import { showLoader, hideLoader } from "./utils/loaderControl"; // Utility function 
+import { showLoading, hideLoading } from "./context/LoadingContext";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true, // include cookies in requests
 });
 
-// Request Interceptor
-axiosInstance.interceptors.request.use(
-  (config) => {
-    showLoader(); // 🔁 Start loading before request
-    return config;
-  },
-  (error) => {
-    hideLoader();
-    return Promise.reject(error);
-  }
-);
+axiosInstance.interceptors.request.use((config) => {
+  showLoading();
+  return config;
+});
 
-// Response Interceptor
 axiosInstance.interceptors.response.use(
-  (response) => {
-    hideLoader(); // ✅ Stop loading on success
-    return response;
+  (res) => {
+    hideLoading();
+    return res;
   },
-  (error) => {
-    hideLoader();
-    return Promise.reject(error);
+  (err) => {
+    hideLoading();
+    return Promise.reject(err);
   }
 );
 

@@ -15,7 +15,6 @@ const ProductDetail = () => {
       try {
         const res = await axios.get(`/api/product/${id}`); // Adjust the URL if needed
         setProduct(res.data);
-        console.log('📦 Product fetched:', res.data);
       } catch (err) {
         console.error('❌ Error fetching product:', err);
         setError(err.response?.data?.message || 'Failed to load product');
