@@ -72,7 +72,7 @@ const ManageOrders = () => {
                 <tr key={order._id} className="hover:bg-gray-50 transition">
                   <td className="px-6 py-4 text-sm text-gray-800">{order._id}</td>
                   <td className="px-6 py-4 text-sm text-gray-800">
-                    {order.customerName || order.userId.name|| "N/A"}
+                    {order.customerName?.trim() || order.userId?.name|| "N/A"}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-800">
                     {new Date(order.createdAt).toLocaleDateString()}
