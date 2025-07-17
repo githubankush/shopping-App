@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 const Login = () => {
 
   const { setUser } = useAuth(); // 🛣️ Accessing setUser from AuthContext to update auth state
-  const Navigate = useNavigate(); // 🛣️ useNavigate hook for navigation
+  const navigate = useNavigate(); // 🛣️ useNavigate hook for navigation
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
@@ -25,17 +25,15 @@ const Login = () => {
       metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
     });
 
-    if (!res || !res.data) {
-      throw new Error("No response from server");
+    if (!res || !res.data || !res.data.user) {
+      throw new Error("No user data received from server");
     }
 
-    setUser(res.data); // Set auth user
+
+    setUser(res.data.user); // Set auth user in context
     alert("Login Successful!");
-    toast.success("Login Successful!"); // 🛣️ Show success message
-    console.log("User Data:", res.data);
-    console.log("Token:", res.data.token); // 🛣️ Log token if needed
-    // Redirect to home page after successful login
-    Navigate('/');
+    toast.success("Login Successful!"); 
+    navigate('/');
   } catch (err) {
     console.error("Login Error:", err);
     alert(err?.response?.data?.message || "Login failed. Try again.");

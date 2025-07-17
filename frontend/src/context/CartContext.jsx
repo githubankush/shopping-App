@@ -9,7 +9,7 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async () => {
     try {
-      const res = await axios.get('/api/cart', { withCredentials: true });
+      const res = await axios.get('/api/cart', { withCredentials: true, metadata: { showLoading: true } });
       setCart(res.data);
     } catch (err) {
       console.error("Failed to fetch cart:", err);
