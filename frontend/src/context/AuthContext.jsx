@@ -6,9 +6,8 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Add loading state
-
-  useEffect(() => {
-    const fetchUser = async () => {
+  
+   const fetchUser = async () => {
       try {
         const res = await axios.get('/api/auth/profile', { withCredentials: true });
         setUser(res.data);
@@ -19,12 +18,12 @@ export const AuthProvider = ({ children }) => {
         setLoading(false); // Important!
       }
     };
-
+  useEffect(() => {
     fetchUser();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading }}>
+    <AuthContext.Provider value={{ user, setUser, loading, fetchUser }}>
       {loading ? <p className='text-center text-xl font-bold mt-10 '>Loading...</p> : children}
     </AuthContext.Provider>
   );

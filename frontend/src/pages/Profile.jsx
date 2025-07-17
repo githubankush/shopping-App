@@ -6,10 +6,12 @@ import moment from "moment";
 import { FaUser, FaBox, FaRupeeSign, FaCheck, FaTimes, FaShippingFast } from "react-icons/fa";
 
 const Profile = () => {
-  const { user,loading } = useAuth();
+  
+  const { user,loading} = useAuth();
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
+
     const fetchOrders = async () => {
       try {
         const res = await axios.get("/api/order/user", {
@@ -22,7 +24,9 @@ const Profile = () => {
       }
     };
 
+
     if (user) fetchOrders();
+
   }, [user]);
 
   if (loading) {
