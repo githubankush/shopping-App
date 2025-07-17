@@ -8,7 +8,7 @@ const ManageOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const { data } = await axios.get("/api/admin/orders");
+        const { data } = await axios.get("/api/admin/orders",{metadata: { showLoading: true }, withCredentials: true });
         setOrders(data);
       } catch (error) {
         console.error(error);

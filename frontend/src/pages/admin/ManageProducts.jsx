@@ -56,6 +56,7 @@ const ManageProducts = () => {
     try {
       const { data } = await axios.get("/api/admin/products", {
         withCredentials: true,
+        metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
       });
       setProducts(data);
     } catch (err) {
