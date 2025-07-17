@@ -30,7 +30,7 @@ const Login = () => {
     }
 
 
-    setUser(res.data); // Set auth user in context
+    setUser(res.data.user); // Set auth user only in context
     alert("Login Successful!");
     toast.success("Login Successful!"); 
     navigate('/');
