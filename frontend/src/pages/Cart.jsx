@@ -7,11 +7,8 @@ import { FaAngleLeft, FaAngleRight, FaTimes } from "react-icons/fa";
 const Cart = () => {
   const [cart, setCart] = useState(null);
   const [loading, setLoading] = useState(false);
-
   
-
-  useEffect(() => {
-    const fetchCart = async () => {
+  const fetchCart = async () => {
     try {
       const res = await axios.get("/api/cart", { withCredentials: true , 
       metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
@@ -23,6 +20,10 @@ const Cart = () => {
     }
     
   };
+  
+
+  useEffect(() => {
+    
     fetchCart();
   }, []);
 
