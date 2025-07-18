@@ -6,9 +6,11 @@ import toast from "react-hot-toast";
 
 const AddToCartButton = ({ product }) => {
   const { fetchCart } = useCart();
+  const [isAdding, setIsAdding] = useState(false);
   const { user } = useAuth(); // 🛣️ Accessing user from AuthContext
   const handleAddToCart = async () => {
     try {
+       setIsAdding(true); 
       const cleanedProduct = {
         ...product,
         _id: product._id?.$oid || product._id?.toString?.() || product._id
@@ -35,15 +37,22 @@ const AddToCartButton = ({ product }) => {
       console.error("Error adding to cart:", err.response?.data || err.message);
       alert("Failed to add item to cart.");
     }
+     finally {
+    setIsAdding(false); // Stop loading
+  }
   };
 
   return (
     <button
-      onClick={handleAddToCart}
-      className="bg-purple-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg text-sm"
-    >
-      Add to Cart
-    </button>
+  onClick={handleAddToCart}
+  disabled={isAdding}
+  className={`${
+    isAdding ? 'bg-purple-400 cursor-not-allowed' : 'bg-purple-600 hover:bg-blue-700'
+  } text-white font-medium py-2 px-4 rounded-lg text-sm transition duration-200`}
+>
+  {isAdding ? 'Adding...' : 'Add to Cart'}
+</button>
+
   );
 };
 
