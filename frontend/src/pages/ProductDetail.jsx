@@ -43,13 +43,14 @@ const ProductDetail = () => {
       className="max-w-3xl mx-auto p-4 bg-white rounded-lg shadow-md mt-6"
     >
       {/* ✅ Perfect image container */}
-      <div className="w-full aspect-[4/3] bg-gray-100 rounded-md overflow-hidden mb-4">
+      <div className="w-full aspect-[3/2] bg-gray-100 rounded-md overflow-hidden mb-4">
         <img
           src={image}
           alt={name}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
         />
       </div>
+
 
       <div className="text-black space-y-3">
         <h2 className="text-2xl font-semibold">{name}</h2>
