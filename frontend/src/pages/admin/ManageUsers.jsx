@@ -25,7 +25,7 @@ const ManageUsers = () => {
     const fetchUsers = async () => {
       try {
         const { data } = await axios.get('/api/admin/users');
-        console.log("Fetched users in ManageUsers:", data);
+        // console.log("Fetched users in ManageUsers:", data);
         setUsers(data);
       } catch (err) {
         console.error("Error loading users:", err);

@@ -89,7 +89,7 @@ const Cart = () => {
         description: "Order Payment",
         order_id: razorpayOrder.id,
        handler: async function (response) {
-        console.log("💸 Razorpay payment successful:", response);
+        // console.log("💸 Razorpay payment successful:", response);
           try {
             const checkoutRes = await axios.post(
               "/api/checkout",
@@ -103,7 +103,7 @@ const Cart = () => {
               }
             );
 
-            console.log("✅ Checkout response:", checkoutRes.data);
+            // console.log("✅ Checkout response:", checkoutRes.data);
             toast.success("Order placed!");
             fetchCart();
 
