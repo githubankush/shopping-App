@@ -12,13 +12,17 @@ const Navbar = () => {
   const cartItemCount = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const [isAdmin, setIsAdmin] = useState(false);
 
+  if(user?.role === 'admin'){
+    setIsAdmin(true);
+  }
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Product", path: "/product" },
     { name: "About", path: "/about" },
   ];
-   
+
   useEffect(() => {
     fetchCart(); // Fetch cart items on mount
   }
@@ -32,6 +36,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo */}
         <Logo />
+        {isAdmin && (<span className="text-sm hover:text-green-400 transition text-red-500">Admin</span>)}
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">

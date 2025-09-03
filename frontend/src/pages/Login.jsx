@@ -31,6 +31,12 @@ const Login = () => {
 
 
     setUser(res.data.user); // Set auth user only in context
+    if(res.data.user.role === 'admin'){
+      toast.success("Admin Login Successful!");
+      navigate('/admin/dashboard'); // Redirect admin to dashboard
+      return; // Exit early to prevent further execution
+    }
+    
     alert("Login Successful!");
     toast.success("Login Successful!"); 
     navigate('/');
