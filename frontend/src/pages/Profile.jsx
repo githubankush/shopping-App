@@ -51,8 +51,8 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-black p-6 text-white">
       {/* Title */}
-      <h1 className="text-5xl font-extrabold text-center mb-12 bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 text-transparent bg-clip-text drop-shadow-lg">
-        🎉 My Profile
+      <h1 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 text-transparent bg-clip-text drop-shadow-lg">
+      My Profile
       </h1>
 
       {/* Profile Info */}
@@ -95,7 +95,6 @@ const Profile = () => {
         >
           {/* Order Header */}
           <div className="bg-gradient-to-r from-purple-600 to-pink-500 px-6 py-3 rounded-t-2xl flex justify-between items-center">
-            <p className="font-bold text-white">#{order._id.slice(-6)}</p>
             <p className="text-sm text-gray-200">
               {moment(order.createdAt).format("MMM Do YYYY, h:mm A")}
             </p>
@@ -162,9 +161,7 @@ const Profile = () => {
               <span className="inline-flex items-center gap-2 text-2xl font-bold text-pink-300">
                 <FaRupeeSign /> {order.totalAmount}
               </span>
-              <button className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-lg shadow hover:scale-105 transition text-sm font-medium">
-                Track Order
-              </button>
+              
             </div>
           </div>
         </li>
