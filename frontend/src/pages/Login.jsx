@@ -1,55 +1,61 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom"; // 🛣️ Importing useNavigate for navigation
-import axios from "../axios"; // 🛣️ Importing axios for API calls
-import { useAuth } from "../context/AuthContext"; // 🛣️ Importing AuthContext to access auth state
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "../axios";
+import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
-const Login = () => {
 
-  const { setUser } = useAuth(); // 🛣️ Accessing setUser from AuthContext to update auth state
-  const navigate = useNavigate(); // 🛣️ useNavigate hook for navigation
-  const [formData, setFormData] = React.useState({
+const Login = () => {
+  const { user, setUser } = useAuth();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  // 🔹 Auto-redirect if already logged in
+  useEffect(() => {
+    if (user?.role === "admin") {
+      navigate("/admin/products"); // or /admin/dashboard if you have it
+    } else if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  }
   const handleLogin = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await axios.post('/api/auth/login', formData, {
-      withCredentials: true,
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
-    });
+    e.preventDefault();
+    try {
+      const res = await axios.post("/api/auth/login", formData, {
+        withCredentials: true,
+        metadata: { showLoading: true },
+      });
 
-    if (!res || !res.data || !res.data.user) {
-      throw new Error("No user data received from server");
+      if (!res?.data?.user) {
+        throw new Error("No user data received from server");
+      }
+
+      const loggedInUser = res.data.user;
+      setUser(loggedInUser); // ✅ Update context
+
+      // ✅ Redirect based on role
+      if (loggedInUser.role === "admin") {
+        toast.success("Admin Login Successful!");
+        navigate("/admin/products"); // change to /admin/dashboard if you prefer
+      } else {
+        toast.success("Login Successful!");
+        navigate("/");
+      }
+    } catch (err) {
+      console.error("Login Error:", err);
+      toast.error(err?.response?.data?.message || "Login failed. Try again.");
     }
-
-
-    setUser(res.data.user); // Set auth user only in context
-    // if(res.data?.user?.role === 'admin'){
-    //   toast.success("Admin Login Successful!");
-    //   navigate('/admin/dashboard'); // Redirect admin to dashboard
-    //   return; // Exit early to prevent further execution
-    // }
-    
-    alert("Login Successful!");
-    toast.success("Login Successful!"); 
-    navigate('/');
-  } catch (err) {
-    console.error("Login Error:", err);
-    alert(err?.response?.data?.message || "Login failed. Try again.");
-    toast.error(err?.response?.data?.message || "Login failed. Try again."); // 🛣️ Show error message
-  }
-};
-
+  };
 
   return (
-    <div className="h-[calc(100vh-8rem)]  flex items-center justify-center bg-[#6d28d9] p-4 overflow-hidden">
+    <div className="h-[calc(100vh-8rem)] flex items-center justify-center bg-[#6d28d9] p-4 overflow-hidden">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-center text-[#6d28d9] mb-6">
           Welcome Back
@@ -57,16 +63,20 @@ const Login = () => {
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             name="email"
+            value={formData.email}
             onChange={handleChange}
             type="email"
             placeholder="Email"
+            required
             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
           />
           <input
             name="password"
+            value={formData.password}
             onChange={handleChange}
             type="password"
             placeholder="Password"
+            required
             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400"
           />
           <button
@@ -78,7 +88,10 @@ const Login = () => {
         </form>
         <p className="text-sm text-center mt-4">
           Don’t have an account?{" "}
-          <Link to="/register" className="text-[#6d28d9] font-medium hover:underline">
+          <Link
+            to="/register"
+            className="text-[#6d28d9] font-medium hover:underline"
+          >
             Register
           </Link>
         </p>
