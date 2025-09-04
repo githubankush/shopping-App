@@ -143,7 +143,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="p-4 max-w-5xl mx-auto">
+    <div className="p-4 max-w-5xl mx-auto  bg-gradient-to-br from-purple-900 via-indigo-900 to-black p-6 text-white">
       
 
       <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-black">
