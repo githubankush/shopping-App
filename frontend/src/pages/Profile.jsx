@@ -76,114 +76,104 @@ const Profile = () => {
       </div>
 
       {/* Orders */}
-      <div className="max-w-6xl mx-auto backdrop-blur-lg bg-white/10 border border-indigo-400/30 rounded-2xl shadow-2xl p-10 text-white">
-        <h2 className="text-3xl font-bold mb-10 flex items-center gap-3 text-green-300 drop-shadow-md">
-          <FaBox /> Order History
-        </h2>
+      {/* Orders */}
+<div className="max-w-6xl mx-auto backdrop-blur-lg bg-white/10 border border-indigo-400/30 rounded-2xl shadow-2xl p-10 text-white">
+  <h2 className="text-3xl font-bold mb-10 flex items-center gap-3 text-green-300 drop-shadow-md">
+    <FaBox /> Order History
+  </h2>
 
-        {orders.length === 0 ? (
-          <p className="text-gray-300 flex items-center gap-3 text-lg">
-            <FaShoppingBag className="text-pink-400" /> No orders yet! Start shopping 🎁
-          </p>
-        ) : (
-          <ul className="space-y-10">
-            {orders.map((order) => (
-              <li
-                key={order._id}
-                className="rounded-2xl border border-white/20 bg-gradient-to-br from-white/5 to-white/0 shadow-lg p-8 hover:shadow-pink-500/40 hover:border-pink-400/40 transition"
-              >
-                {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-                  <div>
-                    <p className="text-xs text-gray-400">Order ID</p>
-                    <p className="font-bold tracking-wide text-pink-300">
-                      #{order._id}
+  {orders.length === 0 ? (
+    <p className="text-gray-300 flex items-center gap-3 text-lg">
+      <FaShoppingBag className="text-pink-400" /> No orders yet! Start shopping 🎁
+    </p>
+  ) : (
+    <ul className="space-y-12">
+      {orders.map((order) => (
+        <li
+          key={order._id}
+          className="rounded-2xl border border-white/20 bg-gradient-to-br from-white/5 to-white/0 shadow-lg hover:shadow-pink-500/40 transition"
+        >
+          {/* Order Header */}
+          <div className="bg-gradient-to-r from-purple-600 to-pink-500 px-6 py-3 rounded-t-2xl flex justify-between items-center">
+            <p className="font-bold text-white">#{order._id.slice(-6)}</p>
+            <p className="text-sm text-gray-200">
+              {moment(order.createdAt).format("MMM Do YYYY, h:mm A")}
+            </p>
+          </div>
+
+          <div className="p-6 space-y-6">
+            {/* Items */}
+            <div className="grid sm:grid-cols-2 gap-6">
+              {order.items.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-4 bg-white/10 p-4 rounded-xl border border-white/10 hover:border-pink-400/30 transition"
+                >
+                  <img
+                    src={item.productId?.image}
+                    alt={item.productId?.name}
+                    className="w-20 h-20 rounded-lg object-cover"
+                  />
+                  <div className="flex-1">
+                    <p className="font-semibold text-lg">
+                      {item.productId?.name}
+                    </p>
+                    <p className="text-sm text-gray-300">
+                      Qty: {item.quantity} × ₹{item.productId?.price}
                     </p>
                   </div>
-                  <p className="text-sm text-gray-300 mt-3 sm:mt-0">
-                    Placed on{" "}
-                    <span className="font-medium text-cyan-300">
-                      {moment(order.createdAt).format("MMM Do YYYY, h:mm A")}
-                    </span>
-                  </p>
                 </div>
+              ))}
+            </div>
 
-                {/* Status */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6 text-base">
-                  <p>
-                    <span className="font-semibold text-purple-300">
-                      📦 Status:
-                    </span>{" "}
-                    <span
-                      className={`font-bold ${
-                        order.status === "Processing"
-                          ? "text-yellow-400"
-                          : order.status === "Shipped"
-                          ? "text-blue-400"
-                          : order.status === "Delivered"
-                          ? "text-green-400"
-                          : "text-red-400"
-                      }`}
-                    >
-                      {order.status}
-                    </span>
-                  </p>
+            {/* Status & Payment */}
+            <div className="flex flex-wrap gap-6 text-sm">
+              <span
+                className={`px-3 py-1 rounded-full font-medium ${
+                  order.status === "Processing"
+                    ? "bg-yellow-500/20 text-yellow-400"
+                    : order.status === "Shipped"
+                    ? "bg-blue-500/20 text-blue-400"
+                    : order.status === "Delivered"
+                    ? "bg-green-500/20 text-green-400"
+                    : "bg-red-500/20 text-red-400"
+                }`}
+              >
+                {order.status}
+              </span>
 
-                  <p>
-                    <span className="font-semibold text-purple-300">
-                      💳 Payment:
-                    </span>{" "}
-                    {order.paymentStatus === "Paid" ? (
-                      <FaCheck className="inline text-green-400 ml-1" />
-                    ) : (
-                      <FaTimes className="inline text-red-400 ml-1" />
-                    )}{" "}
-                    ({order.paymentStatus})
-                  </p>
+              <span
+                className={`px-3 py-1 rounded-full font-medium ${
+                  order.paymentStatus === "Paid"
+                    ? "bg-green-500/20 text-green-400"
+                    : "bg-red-500/20 text-red-400"
+                }`}
+              >
+                {order.paymentStatus}
+              </span>
 
-                  <p>
-                    <span className="font-semibold text-purple-300">
-                      🆔 Payment ID:
-                    </span>{" "}
-                    {order.razorpayPaymentId || "N/A"}
-                  </p>
-                </div>
+              <span className="text-gray-400">
+                Payment ID: {order.razorpayPaymentId || "N/A"}
+              </span>
+            </div>
 
-                {/* Items */}
-                <div className="space-y-5">
-                  {order.items.map((item, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-6 bg-white/5 rounded-xl p-4 border border-white/10 hover:border-pink-400/30 transition"
-                    >
-                      <img
-                        className="w-20 h-20 rounded-lg object-cover shadow-md"
-                        src={`${item.productId?.image}`}
-                        alt="Product"
-                      />
-                      <div className="flex-1">
-                        <p className="font-semibold text-lg text-white">
-                          {item.productId?.name || "Product"}
-                        </p>
-                        <p className="text-sm text-gray-300">
-                          Qty: {item.quantity} × ₹{item.productId?.price || 0}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+            {/* Footer */}
+            <div className="flex items-center justify-between mt-6">
+              <span className="inline-flex items-center gap-2 text-2xl font-bold text-pink-300">
+                <FaRupeeSign /> {order.totalAmount}
+              </span>
+              <button className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 rounded-lg shadow hover:scale-105 transition text-sm font-medium">
+                Track Order
+              </button>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
 
-                {/* Total */}
-                <div className="text-right mt-6">
-                  <span className="inline-flex items-center gap-2 text-2xl font-bold text-pink-300 drop-shadow-md">
-                    <FaRupeeSign /> {order.totalAmount}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      
     </div>
   );
 };
