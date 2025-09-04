@@ -1,20 +1,28 @@
 import React from "react";
-import axios from "../axios"; // Axios instance with baseURL
+import axios from "../axios";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast"; 
+import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext"; 
+
 const Logout = () => {
   const navigate = useNavigate();
+  const { setUser } = useAuth(); 
+
   const handleLogout = async () => {
     try {
-      await axios.get("/api/auth/logout", { withCredentials: true }, {
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
-    });
-      localStorage.removeItem("authUser"); // or useContext if you're using context
-      navigate("/login"); // Redirect to login page after logout
-      alert("Logout Successful!");
+      await axios.get("/api/auth/logout", {
+        withCredentials: true,
+        metadata: { showLoading: true },
+      });
+
+      // Clear user from context
+      setUser(null);
+
       toast.success("Logout Successful!");
+      navigate("/login");
     } catch (error) {
       console.error("Logout failed:", error);
+      toast.error("Logout failed. Try again.");
     }
   };
 
