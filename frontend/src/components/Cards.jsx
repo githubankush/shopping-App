@@ -14,7 +14,7 @@ const Cards = ({ product }) => {
       className="flex flex-col border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden bg-gradient-to-b from-white to-gray-50"
     >
       {/* 📸 Image Section with fixed ratio */}
-      <div className="relative w-full aspect-[4/3] bg-gray-100 flex items-center justify-center overflow-hidden">
+      <div className="relative w-full aspect-[4/3] bg-white flex items-center justify-center overflow-hidden">
         <img
           src={image}
           alt={name}
