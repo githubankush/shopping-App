@@ -1,7 +1,7 @@
 // src/components/Loading.jsx
 import React from "react";
 import { useLoading } from "../context/LoadingContext";
-import { FaShoppingBag } from "react-icons/fa";
+import { FaShoppingBag } from "react-icons/fa"; // Or any icon you like
 
 const Loading = () => {
   const { isLoading } = useLoading();
@@ -9,25 +9,15 @@ const Loading = () => {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-md">
-      <div className="relative flex flex-col items-center justify-center p-10 rounded-2xl bg-white/10 backdrop-blur-2xl shadow-2xl border border-white/20 space-y-6">
-        {/* Spinner with glow */}
-        <div className="relative">
-          <div className="w-20 h-20 border-[6px] border-white/30 border-t-primary rounded-full animate-spin" />
-          <div className="absolute inset-0 w-20 h-20 rounded-full bg-primary/20 blur-xl animate-ping" />
-        </div>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div className="flex flex-col items-center justify-center space-y-4">
+        {/* Spinner */}
+        <div className="w-16 h-16 border-[6px] border-white border-t-primary rounded-full animate-spin" />
 
         {/* Branding */}
-        <div className="flex items-center space-x-3 text-white text-2xl font-semibold tracking-wide drop-shadow-lg">
-          <FaShoppingBag className="text-primary animate-bounce drop-shadow-md" />
+        <div className="flex items-center space-x-2 text-white text-xl font-semibold tracking-wide">
+          <FaShoppingBag className="text-primary animate-bounce" />
           <span className="animate-pulse">Loading...</span>
-        </div>
-
-        {/* Small glowing dots */}
-        <div className="flex space-x-2">
-          <span className="w-3 h-3 bg-primary rounded-full animate-bounce [animation-delay:0ms]" />
-          <span className="w-3 h-3 bg-primary rounded-full animate-bounce [animation-delay:200ms]" />
-          <span className="w-3 h-3 bg-primary rounded-full animate-bounce [animation-delay:400ms]" />
         </div>
       </div>
     </div>
