@@ -2,13 +2,13 @@ import React from 'react';
 import { useState } from 'react';
 import axios from '../axios';
 import { useCart } from "../context/CartContext";
-import {useAuth } from "../context/AuthContext"; // 🛣️ Importing user context to access user data
+import {useAuth } from "../context/AuthContext"; 
 import toast from "react-hot-toast";
 
 const AddToCartButton = ({ product }) => {
   const { fetchCart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
-  const { user } = useAuth(); // 🛣️ Accessing user from AuthContext
+  const { user } = useAuth();
   const handleAddToCart = async () => {
     try {
        setIsAdding(true); 
@@ -27,13 +27,13 @@ const AddToCartButton = ({ product }) => {
           quantity: 1
         },
         { withCredentials: true ,
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+      metadata: { showLoading: true }, 
     }
       );
 
       // alert(`${product.name} added to cart!`);
       toast.success(`${product.name} added to cart!`);
-      await fetchCart(); // ✅ Update global cart
+      await fetchCart(); 
     } catch (err) {
       console.error("Error adding to cart:", err.response?.data || err.message);
       alert("Failed to add item to cart.");

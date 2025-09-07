@@ -22,7 +22,7 @@ const Cards = ({ product }) => {
         />
       </div>
 
-      {/* 📝 Content */}
+      {/* Content */}
       <div className="flex flex-col flex-1 p-4">
         <h2 className="text-lg font-semibold text-gray-800 truncate">{name}</h2>
 
@@ -39,7 +39,7 @@ const Cards = ({ product }) => {
           </div>
         </div>
 
-        {/* 🛒 Button at Bottom */}
+        {/* Button at Bottom */}
         <div className="mt-4">
           <AddToCartButton
             product={{

@@ -10,9 +10,9 @@ const Product = () => {
     const fetchProducts = async () => {
       try {
         const { data } = await axios.get("/api/product", {
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+      metadata: { showLoading: true }, 
     });
-        const shuffled = [...data].sort(() => Math.random() - 0.5); // optional
+        const shuffled = [...data].sort(() => Math.random() - 0.5); 
         setFilteredProducts(shuffled);
       } catch (err) {
         console.error("Error fetching products:", err);

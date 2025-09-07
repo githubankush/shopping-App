@@ -1,13 +1,13 @@
 import React from 'react';
-import Cards from '../components/Cards'; // ✅ required import
+import Cards from '../components/Cards'; 
 import axios from '../axios';
-import { useEffect } from 'react'; // ✅ useEffect to fetch data
+import { useEffect } from 'react'; 
 const Sports = () => {
-  const [sportsProducts, setProducts] = React.useState([]); // ✅ useState to manage products
+  const [sportsProducts, setProducts] = React.useState([]); 
   useEffect(() => {
   const fetchSportsProducts = async () => {
     const { data } = await axios.get("/api/product?category=sports", {
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+      metadata: { showLoading: true }, 
     });
     setProducts(data);
   };

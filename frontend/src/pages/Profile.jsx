@@ -84,7 +84,7 @@ const Profile = () => {
 
   {orders.length === 0 ? (
     <p className="text-gray-300 flex items-center gap-3 text-lg">
-      <FaShoppingBag className="text-pink-400" /> No orders yet! Start shopping 🎁
+      <FaShoppingBag className="text-pink-400" /> No orders yet! Start shopping 
     </p>
   ) : (
     <ul className="space-y-12">

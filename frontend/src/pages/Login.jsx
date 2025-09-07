@@ -12,10 +12,10 @@ const Login = () => {
     password: "",
   });
 
-  // 🔹 Auto-redirect if already logged in
+  //  Auto-redirect if already logged in
   useEffect(() => {
     if (user?.role === "admin") {
-      navigate("/admin/products"); // or /admin/dashboard if you have it
+      navigate("/admin/products"); 
     } else if (user) {
       navigate("/");
     }
@@ -38,12 +38,12 @@ const Login = () => {
       }
 
       const loggedInUser = res.data.user;
-      setUser(loggedInUser); // ✅ Update context
+      setUser(loggedInUser); 
 
-      // ✅ Redirect based on role
+      // Redirect based on role
       if (loggedInUser.role === "admin") {
         toast.success("Admin Login Successful!");
-        navigate("/admin/products"); // change to /admin/dashboard if you prefer
+        navigate("/admin/products"); 
       } else {
         toast.success("Login Successful!");
         navigate("/");

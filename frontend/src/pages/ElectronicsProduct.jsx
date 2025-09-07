@@ -1,9 +1,7 @@
 import React from 'react';
 import Cards from '../components/Cards';
 import { useEffect } from 'react';
-import axios from '../axios'; // Adjust the path to match your axios instance
-
-// import electronicsProducts from '../data/electronicsProducts'; // Adjust the path to match your file location
+import axios from '../axios'; 
 
 const ElectronicsProduct = () => {
   const [electronicsProducts, setelectronicsProducts] = React.useState([]);
@@ -11,7 +9,7 @@ const ElectronicsProduct = () => {
     const fetchElectronics = async () => {
       try {
         const { data } = await axios.get("/api/product?category=electronics", {
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+      metadata: { showLoading: true }, 
     });
         setelectronicsProducts(data);
       } catch (err) {

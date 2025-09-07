@@ -11,7 +11,7 @@ const Cart = () => {
   const fetchCart = async () => {
     try {
       const res = await axios.get("/api/cart", { withCredentials: true , 
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+      metadata: { showLoading: true }, 
     });
       setCart(res.data);
     } catch (err) {
@@ -52,7 +52,7 @@ const Cart = () => {
         "/api/cart/remove",
         { productId ,
         withCredentials: true , 
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+      metadata: { showLoading: true },
     }
       );
       setCart(res.data);
@@ -77,7 +77,7 @@ const Cart = () => {
         "/api/payment/create-order",
         { amount: total ,
          withCredentials: true , 
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+      metadata: { showLoading: true },
     }
       );
 
@@ -249,7 +249,7 @@ const Cart = () => {
             onClick={handleCheckout}
             className="bg-gradient-to-r from-green-400 via-emerald-500 to-teal-600 hover:scale-105 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition duration-200"
           >
-            Proceed to Checkout 🚀
+            Proceed to Checkout 
           </button>
         </div>
       )}

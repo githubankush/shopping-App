@@ -44,7 +44,7 @@ const ProductDetail = () => {
       className="max-w-6xl mx-auto p-6 mt-8"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-2xl shadow-lg p-6">
-        {/* ✅ Responsive Image Container */}
+        {/*  Responsive Image Container */}
         <div className="relative w-full aspect-square bg-gray-100 rounded-xl overflow-hidden">
           <img
             src={image}
@@ -53,7 +53,7 @@ const ProductDetail = () => {
           />
         </div>
 
-        {/* ✅ Product Info */}
+        {/*  Product Info */}
         <div className="flex flex-col justify-between space-y-5">
           <div>
             <h2 className="text-3xl font-bold text-gray-900">{name}</h2>

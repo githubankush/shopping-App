@@ -66,7 +66,7 @@ const App = () => {
               <Route path="/product/homekitchen" element={<HomeKitchen />} />
               <Route path="*" element={<Error />} />
 
-              {/* 🔐 Admin section */}
+              {/* Admin section */}
               <Route path="/admin/*" element={<AdminRoutes />} />
 
             </Routes>

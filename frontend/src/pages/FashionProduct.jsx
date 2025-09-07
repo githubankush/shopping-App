@@ -1,8 +1,7 @@
 import React from 'react';
 import Cards from '../components/Cards';
 import { useEffect } from 'react';
-import axios from '../axios'; // Adjust the path to match your axios instance
-
+import axios from '../axios';
 
 const FashionProduct = () => {
 
@@ -11,7 +10,7 @@ const FashionProduct = () => {
     const fetchFashionProducts = async () => {
       try {
         const { data } = await axios.get("/api/product?category=fashion", {
-      metadata: { showLoading: true }, // ✅ Only DB routes trigger loader
+      metadata: { showLoading: true }, 
     });
         setFashionProducts(data);
       } catch (err) {
