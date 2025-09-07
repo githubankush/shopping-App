@@ -14,7 +14,7 @@ const Cards = ({ product }) => {
       transition={{ delay: 0.1, duration: 0.4 }}
       className="flex flex-col border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden bg-gradient-to-b from-white to-gray-50"
     >
-      {/* 📸 Image Section with fixed ratio */}
+      {/* 📸 Image Section */}
       <div className="relative w-full aspect-[4/3] bg-white flex items-center justify-center overflow-hidden">
         <img
           src={image}
@@ -23,7 +23,7 @@ const Cards = ({ product }) => {
         />
       </div>
 
-      {/* Content */}
+      {/* 📝 Content */}
       <div className="flex flex-col flex-1 p-4">
         <h2 className="text-lg font-semibold text-gray-800 truncate">{name}</h2>
 
@@ -40,18 +40,20 @@ const Cards = ({ product }) => {
           </div>
         </div>
 
-        {/* Button at Bottom */}
-        <div>
-          <div className="mt-4">
-            <AddToCartButton
-              product={{
-                ...product,
-                _id: product._id?.$oid || product._id?.toString?.() || product._id,
-              }}
-            />
-          </div>
-          <Link to={`/product/${product._id}`} className="mt-2 px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition duration-300">View</Link>
-
+        {/* 🎯 Actions */}
+        <div className="mt-4 flex items-center justify-between gap-2">
+          <AddToCartButton
+            product={{
+              ...product,
+              _id: product._id?.$oid || product._id?.toString?.() || product._id,
+            }}
+          />
+          <Link
+            to={`/product/${product._id}`}
+            className="px-4 py-2 rounded-lg bg-blue-500 text-white font-medium shadow-sm hover:bg-blue-600 hover:shadow-md transition duration-300"
+          >
+            View
+          </Link>
         </div>
       </div>
     </motion.div>
