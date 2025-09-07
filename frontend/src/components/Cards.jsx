@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import AddToCartButton from "./AddToCartButton";
+import { Link } from "react-router-dom";
 
 const Cards = ({ product }) => {
   const { name, image, price, review, rating, description } = product;
@@ -40,13 +41,17 @@ const Cards = ({ product }) => {
         </div>
 
         {/* Button at Bottom */}
-        <div className="mt-4">
-          <AddToCartButton
-            product={{
-              ...product,
-              _id: product._id?.$oid || product._id?.toString?.() || product._id,
-            }}
-          />
+        <div>
+          <div className="mt-4">
+            <AddToCartButton
+              product={{
+                ...product,
+                _id: product._id?.$oid || product._id?.toString?.() || product._id,
+              }}
+            />
+          </div>
+          <Link to={`/product/${product._id}`} className="mt-2 px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600 transition duration-300">View</Link>
+
         </div>
       </div>
     </motion.div>
