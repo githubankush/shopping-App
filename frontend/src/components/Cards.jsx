@@ -42,7 +42,7 @@ const Cards = ({ product }) => {
         </div>
 
         {/* 🎯 Actions pinned at bottom */}
-        <div className="mt-auto flex items-center justify-between gap-2">
+        <div className="mt-auto flex items-center justify-between gap-2 pt-2">
           <AddToCartButton
             product={{
               ...product,
