@@ -12,7 +12,8 @@ const Cards = ({ product }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1, duration: 0.4 }}
-      className="flex flex-col border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden bg-gradient-to-b from-white to-gray-50"
+      className="flex flex-col border border-gray-200 rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden bg-gradient-to-b from-white to-gray-50 
+                 w-full max-w-[280px] h-[420px]" // 👈 fixed card size
     >
       {/* 📸 Image Section */}
       <div className="relative w-full aspect-[4/3] bg-white flex items-center justify-center overflow-hidden">
@@ -40,8 +41,8 @@ const Cards = ({ product }) => {
           </div>
         </div>
 
-        {/* 🎯 Actions */}
-        <div className="mt-4 flex items-center justify-between gap-2">
+        {/* 🎯 Actions pinned at bottom */}
+        <div className="mt-auto flex items-center justify-between gap-2">
           <AddToCartButton
             product={{
               ...product,
